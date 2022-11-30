@@ -25,15 +25,26 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch('https://api.github.com/users/HerbertAms')
-    .then(response => response.json())
-    .then(data => {
+    async function fetchData() {
+      const response = await fetch('https://api.github.com/users/HerbertAms')
+      const data = await response.json()
+
       setUser({
         name: data.name,
         avatar: data.avatar_url,
-      })
-    })
-  }, [students]);
+      });
+    }
+
+    fetchData();
+    // fetch('https://api.github.com/users/HerbertAms')
+    // .then(response => response.json())
+    // .then(data => {
+    //   setUser({
+    //     name: data.name,
+    //     avatar: data.avatar_url,
+    //   })
+    // })
+  }, []);
 
 
   return (
