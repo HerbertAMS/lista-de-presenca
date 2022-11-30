@@ -7,6 +7,7 @@ import './style.css'
 export function Home() {
   const [studentName, setStudentName] = useState()
   const [students, setStudents] = useState([])
+  const [user, setUser] = useState({name:'', avatar:''})
 
   function handleAddStudent(){
     const newStudent = {
@@ -23,13 +24,25 @@ export function Home() {
     setStudents(prevState => [...prevState, newStudent]) 
   }
 
+  useEffect(() => {
+    fetch('https://api.github.com/users/HerbertAms')
+    .then(response => response.json())
+    .then(data => {
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url,
+      })
+    })
+  }, [students]);
+
+
   return (
     <div className='container'>
       <header>
           <h1>Lista de presença</h1>
         <div>
-          <strong>Herbert Severino</strong>
-          <img src="https://github.com/HerbertAMS.png" alt="Foto de perfil" />
+          <strong>{user.name}</strong>
+          <img src={user.avatar} alt="Foto de perfil" />
         </div>
       </header>
       <input 
