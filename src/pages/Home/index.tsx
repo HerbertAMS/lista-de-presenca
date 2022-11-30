@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Card} from '../../components/Card'
+import {Card, CardProps} from '../../components/Card'
 
 import './style.css'
 
 
 export function Home() {
-  const [studentName, setStudentName] = useState()
-  const [students, setStudents] = useState([])
+  const [studentName, setStudentName] = useState('')
+  const [students, setStudents] = useState<CardProps[]>([])
   const [user, setUser] = useState({name:'', avatar:''})
 
   function handleAddStudent(){
@@ -59,7 +59,7 @@ export function Home() {
       <input 
         type="text" 
         placeholder="Digite o seu nome..." 
-        onChange={e =>  setStudentName(e.target.value)}
+        onChange={e => setStudentName(e.target.value)}
       />
       <button type="button" onClick={handleAddStudent}>
         Adicionar
